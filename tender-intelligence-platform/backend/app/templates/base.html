@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tender Intelligence Platform</title>
+    <link rel="stylesheet" href="/static/css/tailwind.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <link rel="stylesheet" href="/static/css/dark-theme.css">
+</head>
+<body class="min-h-full bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
+    {% include 'partials/header.html' %}
+    <div class="flex">
+        {% include 'partials/sidebar.html' %}
+        <main class="flex-1 p-8">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    {% include 'partials/footer.html' %}
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+    <script src="/static/js/tenders.js"></script>
+    <script src="/static/js/charts.js"></script>
+</body>
+</html>

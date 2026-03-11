@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="space-y-6">
+    <div>
+        <h1 class="text-2xl font-semibold">Tenders</h1>
+        <p class="text-slate-500">Search and filter tenders by source, date, and keywords.</p>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-4 rounded-lg shadow flex flex-wrap gap-4">
+        <input class="flex-1 px-3 py-2 rounded border" placeholder="Search tenders" />
+        <select class="px-3 py-2 rounded border">
+            <option>All Sources</option>
+            <option>GEM</option>
+            <option>CPPP</option>
+            <option>Tender247</option>
+        </select>
+        <input type="date" class="px-3 py-2 rounded border" />
+        <input type="date" class="px-3 py-2 rounded border" />
+        <button class="px-4 py-2 rounded bg-emerald-600 text-white">Export CSV</button>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+        <table class="w-full text-sm">
+            <thead class="text-left text-slate-500">
+                <tr>
+                    <th class="py-2">Tender ID</th>
+                    <th>Description</th>
+                    <th>Dates</th>
+                    <th>Source</th>
+                    <th>Score</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-t border-slate-200 dark:border-slate-700">
+                    <td class="py-2 text-emerald-600">GEM-1234</td>
+                    <td>Data Governance & Master Data Management implementation</td>
+                    <td>01 Aug 2024 - 31 Aug 2024</td>
+                    <td><span class="px-2 py-1 rounded bg-emerald-100 text-emerald-700">GEM</span></td>
+                    <td>
+                        <div class="w-24 bg-slate-200 rounded-full h-2">
+                            <div class="bg-emerald-600 h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </td>
+                    <td class="space-x-2">
+                        <button class="text-emerald-600">View</button>
+                        <button>Bookmark</button>
+                    </td>
+                </tr>
+                <tr class="border-t border-slate-200 dark:border-slate-700">
+                    <td class="py-2 text-emerald-600">T247-778</td>
+                    <td>Material Codification Services for plant assets</td>
+                    <td>10 Aug 2024 - 24 Aug 2024</td>
+                    <td><span class="px-2 py-1 rounded bg-slate-100 text-slate-700">Tender247</span></td>
+                    <td>
+                        <div class="w-24 bg-slate-200 rounded-full h-2">
+                            <div class="bg-emerald-600 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </td>
+                    <td class="space-x-2">
+                        <button class="text-emerald-600">View</button>
+                        <button>Bookmark</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mt-4 flex justify-between text-sm">
+            <span>Showing 1-2 of 1200</span>
+            <div class="space-x-2">
+                <button class="px-3 py-1 border rounded">Prev</button>
+                <button class="px-3 py-1 border rounded">Next</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

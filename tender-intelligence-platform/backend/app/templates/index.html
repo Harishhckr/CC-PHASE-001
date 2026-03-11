@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="space-y-8">
+    <div>
+        <h1 class="text-2xl font-semibold">Dashboard</h1>
+        <p class="text-slate-500">Monitor tender activity and keyword intelligence.</p>
+    </div>
+    {% include 'partials/stats_cards.html' %}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+            <h2 class="font-semibold mb-4">Source Distribution</h2>
+            <div id="sourceChart" class="h-64"></div>
+        </div>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+            <h2 class="font-semibold mb-4">7-Day Trend</h2>
+            <div id="trendChart" class="h-64"></div>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+        <h2 class="font-semibold mb-4">Recent Tenders</h2>
+        <table class="w-full text-sm">
+            <thead class="text-left text-slate-500">
+                <tr>
+                    <th class="py-2">Tender ID</th>
+                    <th>Title</th>
+                    <th>Source</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-t border-slate-200 dark:border-slate-700">
+                    <td class="py-2 text-emerald-600">GEM-1234</td>
+                    <td>MDM Data Governance Implementation</td>
+                    <td>GEM</td>
+                    <td>92%</td>
+                </tr>
+                <tr class="border-t border-slate-200 dark:border-slate-700">
+                    <td class="py-2 text-emerald-600">CPPP-443</td>
+                    <td>Material Codification Services</td>
+                    <td>CPPP</td>
+                    <td>87%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+        <h2 class="font-semibold mb-4">Keyword Cloud</h2>
+        <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">Master Data Management</span>
+            <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700">Data Governance</span>
+            <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700">Material Master</span>
+            <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700">Bill of Material</span>
+        </div>
+    </div>
+</section>
+{% endblock %}

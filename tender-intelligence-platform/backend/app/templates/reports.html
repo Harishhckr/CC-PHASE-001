@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="space-y-6">
+    <div>
+        <h1 class="text-2xl font-semibold">Reports</h1>
+        <p class="text-slate-500">Export tenders, analytics, and KPI summaries.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+            <h2 class="font-semibold">Weekly Summary</h2>
+            <p class="text-sm text-slate-500">Download weekly analytics report.</p>
+            <button class="mt-4 px-4 py-2 rounded bg-emerald-600 text-white">Download PDF</button>
+        </div>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+            <h2 class="font-semibold">MDM Keyword Report</h2>
+            <p class="text-sm text-slate-500">Analyze keyword performance.</p>
+            <button class="mt-4 px-4 py-2 rounded bg-emerald-600 text-white">Download Excel</button>
+        </div>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+            <h2 class="font-semibold">Source Health</h2>
+            <p class="text-sm text-slate-500">Track crawler uptime by source.</p>
+            <button class="mt-4 px-4 py-2 rounded bg-emerald-600 text-white">Download CSV</button>
+        </div>
+    </div>
+</section>
+{% endblock %}

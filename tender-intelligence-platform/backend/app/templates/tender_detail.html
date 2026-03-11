@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="space-y-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-semibold">GEM-1234</h1>
+            <p class="text-slate-500">Master Data Management and Governance Program</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">Active</span>
+            <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700">Expiring in 5 days</span>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+        <h2 class="font-semibold mb-4">Relevance Score</h2>
+        <div class="w-full bg-slate-200 rounded-full h-3">
+            <div class="bg-emerald-600 h-3 rounded-full" style="width: 92%"></div>
+        </div>
+        <div class="mt-2 text-sm text-slate-500">Keyword match: 70%, Recency: 15%, Value: 7%</div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow space-y-2">
+            <h2 class="font-semibold">Key Details</h2>
+            <p><strong>Buyer:</strong> Ministry of Power</p>
+            <p><strong>Location:</strong> New Delhi</p>
+            <p><strong>Value:</strong> ₹1.2 Crore</p>
+            <p><strong>Document:</strong> <a href="#" class="text-emerald-600">Download</a></p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow space-y-2">
+            <h2 class="font-semibold">Timeline</h2>
+            <p><strong>Start Date:</strong> 01 Aug 2024</p>
+            <p><strong>End Date:</strong> 31 Aug 2024</p>
+            <p><strong>Days Remaining:</strong> 5</p>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+        <h2 class="font-semibold mb-4">Full Description</h2>
+        <p class="text-sm leading-6">This tender covers master data management, data governance, cataloguing, and material master standardization services.</p>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+        <h2 class="font-semibold mb-4">Matched Keywords</h2>
+        <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">Master Data Management</span>
+            <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700">Data Governance</span>
+            <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700">Cataloguing</span>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow">
+        <h2 class="font-semibold mb-4">Similar Tenders</h2>
+        <ul class="list-disc list-inside text-sm">
+            <li>Material master data cleansing for manufacturing unit</li>
+            <li>Vendor data governance program for PSU</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}
