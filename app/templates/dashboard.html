@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tender Intelligence Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body class="theme-dark">
+    <header class="header">
+      <div>
+        <h1>Tender Intelligence Platform</h1>
+        <p>Real-time tender visibility with relevance scoring.</p>
+      </div>
+      <button id="themeToggle" class="theme-toggle">Light mode</button>
+    </header>
+
+    <section class="metrics">
+      <div class="metric-card">
+        <h3>Total Tenders</h3>
+        <p id="metricTotal">0</p>
+      </div>
+      <div class="metric-card">
+        <h3>Average Relevance</h3>
+        <p id="metricAverage">0%</p>
+      </div>
+      <div class="metric-card">
+        <h3>Last 7 Days</h3>
+        <p id="metricRecent">0</p>
+      </div>
+      <div class="metric-card">
+        <h3>Active Sources</h3>
+        <p id="metricSources">0</p>
+      </div>
+    </section>
+
+    <section class="filters">
+      <form method="get">
+        <input type="text" name="search" placeholder="Search tenders" value="{{ request.args.get('search','') }}" />
+        <select name="source">
+          <option value="">All Sources</option>
+          {% for source in sources %}
+          <option value="{{ source }}" {% if request.args.get('source') == source %}selected{% endif %}>{{ source }}</option>
+          {% endfor %}
+        </select>
+        <select name="min_score">
+          <option value="">Min Score</option>
+          {% for score in [20,40,60,80] %}
+          <option value="{{ score }}" {% if request.args.get('min_score') == score|string %}selected{% endif %}>{{ score }}%</option>
+          {% endfor %}
+        </select>
+        <button type="submit">Apply</button>
+      </form>
+    </section>
+
+    <section class="dashboard">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Tender ID</th>
+              <th>Source</th>
+              <th>Description</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Relevance</th>
+              <th>Docs</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for tender in tenders %}
+            <tr>
+              <td>{{ tender.tender_id }}</td>
+              <td>{{ tender.source }}</td>
+              <td>{{ tender.description }}</td>
+              <td>{{ tender.start_date.strftime('%d %b %Y') if tender.start_date else '—' }}</td>
+              <td>{{ tender.end_date.strftime('%d %b %Y') if tender.end_date else '—' }}</td>
+              <td>{{ tender.relevance_score }}%</td>
+              <td>
+                {% for link in tender.document_links %}
+                <a href="{{ link }}" target="_blank" rel="noopener">Doc</a>
+                {% endfor %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <aside class="side-panel">
+        <div class="panel-card">
+          <h3>Recent Scrapes</h3>
+          <ul id="scrapeLogs"></ul>
+        </div>
+        <div class="panel-card">
+          <h3>Top Sources</h3>
+          <ul id="sourceList"></ul>
+        </div>
+        <div class="panel-card">
+          <h3>Relevance Overview</h3>
+          <canvas id="scoreChart"></canvas>
+        </div>
+      </aside>
+    </section>
+
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+  </body>
+</html>
