@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Claude - Professional Music Mixer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>DJ CLAUDE</h1>
+                <div class="tagline">Professional Mixing Station</div>
+            </div>
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-label">BPM:</span>
+                    <span class="status-value" id="bpm-display">120</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Sync:</span>
+                    <span class="status-value" id="sync-status">OFF</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Master Level:</span>
+                    <canvas id="master-meter" width="120" height="20"></canvas>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="deck-container">
+                <!-- Deck A -->
+                <div class="deck deck-a">
+                    <div class="deck-header">
+                        <h2>DECK A</h2>
+                        <div class="deck-status" id="deck-a-status">READY</div>
+                    </div>
+
+                    <div class="waveform-container">
+                        <canvas id="waveform-a" class="waveform"></canvas>
+                        <div class="waveform-overlay">
+                            <div class="playhead" id="playhead-a"></div>
+                        </div>
+                    </div>
+
+                    <div class="track-info-panel">
+                        <div class="file-input-wrapper">
+                            <input type="file" id="file-a" accept="audio/*">
+                            <label for="file-a" class="file-label">
+                                <span class="file-icon">&#9834;</span>
+                                <span class="file-text">Load Track</span>
+                            </label>
+                        </div>
+                        <div class="track-info" id="track-a-info">
+                            <div class="track-name">No track loaded</div>
+                            <div class="track-time">
+                                <span id="time-a-current">0:00</span> / <span id="time-a-total">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="deck-controls">
+                        <audio id="audio-a"></audio>
+
+                        <div class="transport-controls">
+                            <button class="btn-transport btn-play" id="play-a" title="Play/Pause">
+                                <span class="play-icon">&#9658;</span>
+                            </button>
+                            <button class="btn-transport btn-stop" id="stop-a" title="Stop">
+                                <span>&#9632;</span>
+                            </button>
+                            <button class="btn-transport btn-cue" id="cue-a" title="Cue">CUE</button>
+                        </div>
+
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label class="control-label">VOLUME</label>
+                                <div class="slider-container">
+                                    <input type="range" id="volume-a" class="slider slider-vertical" min="0" max="100" value="75" orient="vertical">
+                                    <div class="slider-value" id="volume-a-value">75</div>
+                                </div>
+                                <canvas id="vu-meter-a" class="vu-meter" width="40" height="150"></canvas>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">PITCH</label>
+                                <div class="slider-container">
+                                    <input type="range" id="speed-a" class="slider" min="50" max="150" value="100">
+                                    <div class="slider-value" id="speed-a-value">0%</div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">EQ HIGH</label>
+                                <div class="slider-container">
+                                    <input type="range" id="eq-high-a" class="slider" min="0" max="100" value="50">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">EQ MID</label>
+                                <div class="slider-container">
+                                    <input type="range" id="eq-mid-a" class="slider" min="0" max="100" value="50">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">EQ LOW</label>
+                                <div class="slider-container">
+                                    <input type="range" id="eq-low-a" class="slider" min="0" max="100" value="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Mixer -->
+                <div class="mixer">
+                    <div class="mixer-header">
+                        <h2>MIXER</h2>
+                    </div>
+
+                    <div class="mixer-controls">
+                        <div class="crossfader-section">
+                            <label class="control-label">CROSSFADER</label>
+                            <div class="crossfader-wrapper">
+                                <div class="crossfader-track">
+                                    <input type="range" id="crossfader" class="crossfader-slider" min="0" max="100" value="50">
+                                </div>
+                                <div class="crossfader-labels">
+                                    <span class="deck-label deck-label-a">A</span>
+                                    <span class="deck-label deck-label-b">B</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="master-section">
+                            <label class="control-label">MASTER</label>
+                            <div class="master-control">
+                                <input type="range" id="master-volume" class="slider slider-vertical" min="0" max="100" value="70" orient="vertical">
+                                <div class="slider-value" id="master-value">70</div>
+                            </div>
+                        </div>
+
+                        <div class="sync-section">
+                            <button class="btn-sync" id="sync-ab">SYNC A→B</button>
+                            <button class="btn-sync" id="sync-ba">SYNC B→A</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deck B -->
+                <div class="deck deck-b">
+                    <div class="deck-header">
+                        <h2>DECK B</h2>
+                        <div class="deck-status" id="deck-b-status">READY</div>
+                    </div>
+
+                    <div class="waveform-container">
+                        <canvas id="waveform-b" class="waveform"></canvas>
+                        <div class="waveform-overlay">
+                            <div class="playhead" id="playhead-b"></div>
+                        </div>
+                    </div>
+
+                    <div class="track-info-panel">
+                        <div class="file-input-wrapper">
+                            <input type="file" id="file-b" accept="audio/*">
+                            <label for="file-b" class="file-label">
+                                <span class="file-icon">&#9834;</span>
+                                <span class="file-text">Load Track</span>
+                            </label>
+                        </div>
+                        <div class="track-info" id="track-b-info">
+                            <div class="track-name">No track loaded</div>
+                            <div class="track-time">
+                                <span id="time-b-current">0:00</span> / <span id="time-b-total">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="deck-controls">
+                        <audio id="audio-b"></audio>
+
+                        <div class="transport-controls">
+                            <button class="btn-transport btn-play" id="play-b" title="Play/Pause">
+                                <span class="play-icon">&#9658;</span>
+                            </button>
+                            <button class="btn-transport btn-stop" id="stop-b" title="Stop">
+                                <span>&#9632;</span>
+                            </button>
+                            <button class="btn-transport btn-cue" id="cue-b" title="Cue">CUE</button>
+                        </div>
+
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label class="control-label">VOLUME</label>
+                                <div class="slider-container">
+                                    <input type="range" id="volume-b" class="slider slider-vertical" min="0" max="100" value="75" orient="vertical">
+                                    <div class="slider-value" id="volume-b-value">75</div>
+                                </div>
+                                <canvas id="vu-meter-b" class="vu-meter" width="40" height="150"></canvas>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">PITCH</label>
+                                <div class="slider-container">
+                                    <input type="range" id="speed-b" class="slider" min="50" max="150" value="100">
+                                    <div class="slider-value" id="speed-b-value">0%</div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">EQ HIGH</label>
+                                <div class="slider-container">
+                                    <input type="range" id="eq-high-b" class="slider" min="0" max="100" value="50">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">EQ MID</label>
+                                <div class="slider-container">
+                                    <input type="range" id="eq-mid-b" class="slider" min="0" max="100" value="50">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">EQ LOW</label>
+                                <div class="slider-container">
+                                    <input type="range" id="eq-low-b" class="slider" min="0" max="100" value="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="effects-panel">
+                <h2>EFFECTS & FILTERS</h2>
+                <div class="effect-controls">
+                    <div class="effect-group">
+                        <label class="effect-label">REVERB</label>
+                        <input type="range" id="reverb" class="effect-slider" min="0" max="100" value="0">
+                        <div class="effect-value">0%</div>
+                    </div>
+                    <div class="effect-group">
+                        <label class="effect-label">DELAY</label>
+                        <input type="range" id="delay" class="effect-slider" min="0" max="100" value="0">
+                        <div class="effect-value">0%</div>
+                    </div>
+                    <div class="effect-group">
+                        <label class="effect-label">FILTER</label>
+                        <input type="range" id="filter" class="effect-slider" min="0" max="100" value="50">
+                        <div class="effect-value">50%</div>
+                    </div>
+                    <div class="effect-group">
+                        <label class="effect-label">FLANGER</label>
+                        <input type="range" id="flanger" class="effect-slider" min="0" max="100" value="0">
+                        <div class="effect-value">0%</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
